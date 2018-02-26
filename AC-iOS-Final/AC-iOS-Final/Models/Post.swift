@@ -7,17 +7,20 @@
 //
 
 import Foundation
+import UIKit
 
 class Post: Codable {
     
     var postID: String
     var imageURL: String?
     var comment: String
+    var userID: String
     
-    init(postID: String, imageURL: String, comment: String) {
+    init(postID: String, imageURL: String, comment: String, userID: String) {
         self.postID = postID
         self.imageURL = imageURL
         self.comment = comment
+        self.userID = userID
         
     }
 }

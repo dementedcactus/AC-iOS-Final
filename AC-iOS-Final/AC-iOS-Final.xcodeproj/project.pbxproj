@@ -33,6 +33,7 @@
 		DBE4AF3420446F8A0046F531 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4AF3320446F8A0046F531 /* Post.swift */; };
 		DBE4AF36204472AE0046F531 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4AF35204472AE0046F531 /* TabBarVC.swift */; };
 		DBE4AF382044909F0046F531 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4AF372044909F0046F531 /* CustomTableViewCell.swift */; };
+		DBE4AF3C2044AA650046F531 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4AF3B2044AA650046F531 /* StorageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		DBE4AF3320446F8A0046F531 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		DBE4AF35204472AE0046F531 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		DBE4AF372044909F0046F531 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		DBE4AF3B2044AA650046F531 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,12 +177,12 @@
 		DBE4AF092044687B0046F531 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				DBE4AF0C204468F40046F531 /* Database */,
-				DBE4AF0B204468E40046F531 /* AuthUser */,
-				DBE4AF0A204468860046F531 /* Storage */,
 				DBE4AF11204469BF0046F531 /* Alert.swift */,
 				DBE4AF1520446A200046F531 /* NetworkConnectivity.swift */,
 				DBE4AF13204469DF0046F531 /* StyleSheet.swift */,
+				DBE4AF0C204468F40046F531 /* Database */,
+				DBE4AF0B204468E40046F531 /* AuthUser */,
+				DBE4AF0A204468860046F531 /* Storage */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -188,6 +190,7 @@
 		DBE4AF0A204468860046F531 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				DBE4AF3B2044AA650046F531 /* StorageService.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBE4AF1C20446AAB0046F531 /* DatabaseService.swift in Sources */,
+				DBE4AF3C2044AA650046F531 /* StorageService.swift in Sources */,
 				DBE4AF2A20446D5F0046F531 /* MainFeedView.swift in Sources */,
 				DBE4AF382044909F0046F531 /* CustomTableViewCell.swift in Sources */,
 				DBE4AF2C20446DC20046F531 /* UploadVC.swift in Sources */,

@@ -25,21 +25,19 @@ class DatabaseService: NSObject {
     var refreshDelegate: RefreshDelegate?
     var showAlertDelegate: ShowAlertDelegate?
     
-    private override init() {
-        self.rootRef = Database.database().reference()
-        self.usersRef = self.rootRef.child("users")
-        //self.cardsRef = self.rootRef.child("cards")
-        //self.decksRef = self.rootRef.child("decks")
-        super.init()
-    }
-    
     /// The singleton object for the DatabaseService API client.
     static let manager = DatabaseService()
     public weak var delegate: DatabaseServiceDelegate?
     var rootRef: DatabaseReference!
     var usersRef: DatabaseReference!
-    //var cardsRef: DatabaseReference!
-    //var decksRef: DatabaseReference!
+    var postsRef: DatabaseReference!
+    
+    private override init() {
+        self.rootRef = Database.database().reference()
+        self.usersRef = self.rootRef.child("users")
+        self.postsRef = self.rootRef.child("posts")
+        super.init()
+    }
     
     /**
      Removes all observers from all references.
@@ -47,9 +45,7 @@ class DatabaseService: NSObject {
     public func stopObserving() {
         rootRef.removeAllObservers()
         usersRef.removeAllObservers()
-        //cardsRef.removeAllObservers()
-        //decksRef.removeAllObservers()
-        
+        postsRef.removeAllObservers()
     }
     
     /** This method checks if the given displayName is already in use by another user.

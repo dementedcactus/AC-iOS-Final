@@ -29,6 +29,7 @@ class MainFeedVC: UIViewController {
         mainFeedView.tableView.estimatedRowHeight = 150
         mainFeedView.tableView.rowHeight = UITableViewAutomaticDimension
         DatabaseService.manager.refreshDelegate = self
+        DatabaseService.manager.showAlertDelegate = self
     }
     
     private func setupView() {
@@ -60,7 +61,13 @@ extension MainFeedVC: UITableViewDataSource {
     
     
 }
-
+extension MainFeedVC: ShowAlertDelegate {
+    func showAlertDelegate(cardOrDeck: String) {
+        let alert = Alert.create(withTitle: "Success", andMessage: "\(cardOrDeck) added!", withPreferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+}
 extension MainFeedVC: RefreshDelegate {
     func refreshTableView() {
 //        DatabaseService.manager.getAllDecks(fromUserID: (AuthUserService.manager.getCurrentUser()?.uid)!, completion: { (someData) in

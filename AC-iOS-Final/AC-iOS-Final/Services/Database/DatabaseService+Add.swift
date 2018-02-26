@@ -19,16 +19,9 @@ extension DatabaseService {
      - Parameter userProfile: The UserProfile object passed in.
      */
     public func addUserProfile(_ userProfile: UserProfile) {
-        //find the node that you want to be doing stuff to
+        
         let ref = usersRef.child(userProfile.userID)
         
-        //Database.database().reference().child("cards").child(userProfile.userID).childByAutoId()
-        
-        
-        //now that you have the node, call the setValue function (which has a completion handler) to input values that you want to set to that node
-        //think of the node as a being part of a dictionary
-        //the node is the key, and you are assigning its value; which is another dictionary in this case
-        //ref : [key: value]
         ref.setValue(["email": userProfile.email,
                       "userID": userProfile.userID,
                       "displayName": userProfile.displayName
@@ -42,44 +35,37 @@ extension DatabaseService {
             }
         }
     }
-    /*
-    public func addCard(_ card: Card) {
-        //1. find ref
-        let ref = cardsRef.child(card.cardUID)
+    
+    public func addPost(_ post: Post, _ image: UIImage?) {
         
-        //2. call set value with completion handler
-        ref.setValue(["question": card.question,
-                      "answer": card.answer,
-                      "category": card.category,
-                      "gotRight": card.gotRight ?? false,
-                      "userID": card.userID,
-                      "cardUID": card.cardUID]) { (error, nil) in
+        let ref = postsRef.child(post.postID)
+        
+        ref.setValue(["imageURL": post.imageURL,
+                      "postID": post.postID,
+                      "comment": post.comment,
+                      "userID": post.userID]) { (error, nil) in
                         if let error = error {
                             print(error)
                         } else {
-                            print("Card Added")
+                            print("Post Added")
                             self.refreshDelegate?.refreshTableView()
-                            self.showAlertDelegate?.showAlertDelegate(cardOrDeck: "Card")
+                            self.showAlertDelegate?.showAlertDelegate(cardOrDeck: "Post ")
                         }
+        }
+        StorageService.manager.storePostImage(image: image, withPostID: post.postID) { (errorMessage, _) in
+            if let errorMessage = errorMessage {
+                print(errorMessage)
+            }
         }
     }
     
-    public func addDeck(_ deck: Deck) {
-        //1. find ref
-        let ref = decksRef.child(deck.userID).child(deck.name)
-        
-        //2. call set value with completion handler
-        ref.setValue(["name": deck.name,
-                      "numberOfCards": deck.numberOfCards ?? 0,
-                      "userID": deck.userID]) { (error, nil) in
-                        if let error = error {
-                            print(error)
-                        } else {
-                            print("Deck Added")
-                            self.refreshDelegate?.refreshTableView()
-                            self.showAlertDelegate?.showAlertDelegate(cardOrDeck: "Deck")
-                        }
-        }
+    public func addImageURLToPost(url: String, postID: String) {
+        addImageURL(url: url, toRef: postsRef, withID: postID)
     }
-    */
+    
+    private func addImageURL(url: String, toRef ref: DatabaseReference, withID id: String) {
+        ref.child(id).child("imageURL").setValue(url)
+        print("added image url")
+    }
+ 
 }

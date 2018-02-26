@@ -18,8 +18,8 @@ class TabBarVC: UITabBarController {
         mainFeedVC.tabBarItem = UITabBarItem(title: "Main Feed", image: UIImage(named: "mainTab"), tag: 0)
         
         uploadVC.tabBarItem = UITabBarItem(title: "Upload", image: UIImage(named: "uploadTab"), tag: 1)
-        
-        self.viewControllers = [mainFeedVC,uploadVC]
+        let navCon = UINavigationController(rootViewController: uploadVC)
+        self.viewControllers = [mainFeedVC,navCon]
     }
     
     override func viewWillAppear(_ animated: Bool) {
