@@ -7,3 +7,17 @@
 //
 
 import Foundation
+
+class Post: Codable {
+    
+    var postID: String
+    var imageURL: String?
+    var comment: String
+    
+    init(postID: String, imageURL: UIImage, comment: String) {
+        self.postID = postID
+        self.imageURL = imageURL
+        self.comment = comment
+        
+    }
+}

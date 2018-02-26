@@ -72,7 +72,7 @@ class CreateAccountView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = .white
+        backgroundColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.00)
         setupObjects()
         setupViews()
     }

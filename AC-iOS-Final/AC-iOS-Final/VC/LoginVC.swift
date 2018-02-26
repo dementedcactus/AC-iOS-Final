@@ -15,6 +15,7 @@ class LoginVC: UIViewController {
     let loginView = LoginView()
     let mainFeedVC = MainFeedVC()
     let createAccountVC = CreateAccountVC()
+    let tabBarVC = TabBarVC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,22 @@ class LoginVC: UIViewController {
         loginView.twitterSignInButton.addTarget(self, action: #selector(twitterButtonPressed), for: .touchUpInside)
         
         setupViews()
+        animateView()
+    }
+    
+    private func animateView() {
+        UIView.animate(withDuration: 2) {
+            self.loginView.titleLabel.alpha = 1
+            self.loginView.facebookSignInButton.alpha = 1
+            self.loginView.twitterSignInButton.alpha = 1
+            self.loginView.emailIconImageView.alpha = 1
+            self.loginView.emailTextField.alpha = 1
+            self.loginView.passwordIconImageView.alpha = 1
+            self.loginView.passwordTextField.alpha = 1
+            self.loginView.signInButton.alpha = 1
+            self.loginView.createAccountButton.alpha = 1
+            self.loginView.forgotPasswordButton.alpha = 1
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -39,10 +56,7 @@ class LoginVC: UIViewController {
             self.loginView.emailTextField.text = user.email
             print("User identified. Display Name: \(String(describing: user.displayName)), Email: \(String(describing: user.email))")
             
-            
-            // Todo: Instansiate tabbarVC and present it
-            
-            //self.navigationController?.pushViewController(TabBarVC, animated: false)
+            self.navigationController?.pushViewController(tabBarVC, animated: false)
         } else {
             print("there is no user")
         }
@@ -89,9 +103,11 @@ class LoginVC: UIViewController {
     }
     
     @objc func twitterButtonPressed() {
+        print("Twitter Button Pressed")
     }
     
     @objc func facebookButtonPressed() {
+        print("Facebook Button Pressed")
     }
     
     @objc func createAccountButtonPressed() {
@@ -169,9 +185,7 @@ extension LoginVC: AuthUserServiceDelegate {
         print("Log in successful for \(userProfile.displayName), \(userProfile.email)")
         //SVProgressHUD.dismiss()
         
-        // Todo: Instansiate tabbarVC and present it
-        
-        navigationController?.pushViewController(TabBarVC, animated: true)
+        navigationController?.pushViewController(tabBarVC, animated: true)
     }
     
     func didFailForgotPassword(_ authUserService: AuthUserService, error: String) {

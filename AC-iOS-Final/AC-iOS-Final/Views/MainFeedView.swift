@@ -7,9 +7,19 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainFeedView: UIView {
 
+    lazy var tableView: UITableView = {
+        let tv = UITableView()
+        //create and register a cell
+        tv.register(CustomTableViewCell.self, forCellReuseIdentifier: "PostCell")
+        tv.backgroundColor = .clear
+        tv.isHidden = false
+        return tv
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -27,6 +37,11 @@ class MainFeedView: UIView {
     
     private func setupViews() {
         
+        self.addSubview(tableView)
+        
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
+        }
     }
 
 }

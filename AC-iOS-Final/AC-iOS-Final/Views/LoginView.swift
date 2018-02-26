@@ -11,42 +11,39 @@ import SnapKit
 
 class LoginView: UIView {
     
-    lazy var appNameLabel: UILabel = {
-        let anb = UILabel()
-        anb.text = "iOS Flash Cards"
-        anb.textColor = .black
-        anb.numberOfLines = 0
-        anb.font = .boldSystemFont(ofSize: 40)
-        anb.textAlignment = .center
-        anb.backgroundColor = .white
-        anb.layer.borderWidth = 0.5
-        return anb
+    lazy var loginImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.image = UIImage(named: "BlackPanther")
+        iv.layer.borderWidth = CGFloat(Stylesheet.BorderWidths.FunctionButtons)
+        Stylesheet.Objects.ImageViews.Opaque.style(imageView: iv)
+        return iv
     }()
     
-    lazy var subtitleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let stl = UILabel()
-        stl.text = "\"Just make an app that helps you make apps\""
-        stl.textColor = .black
-        stl.numberOfLines = 0
-        stl.font = .italicSystemFont(ofSize: 17)
-        stl.textAlignment = .center
-        stl.backgroundColor = .white
+        stl.text = "Wakanda Hyper Information Program"
+        Stylesheet.Objects.Labels.AppName.style(label: stl)
+        stl.backgroundColor = UIColor(white: 1, alpha: 0.03)
+        stl.alpha = 0 // for animation
+        
         return stl
     }()
     
     lazy var facebookSignInButton: UIButton = {
         let button = UIButton()
-        button.setTitle("FaceBook Placeholder", for: .normal)
+        button.setTitle("FaceBook (Coming Soon)", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(red: 0.263, green: 0.353, blue: 0.576, alpha: 1.00)
+        button.alpha = 0 // for animation
         return button
     }()
     
     lazy var twitterSignInButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Twitter Placeholder", for: .normal)
+        button.setTitle("Twitter (Coming Soon)", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(red: 0.325, green: 0.690, blue: 0.875, alpha: 1.00)
+        button.alpha = 0 // for animation
         return button
     }()
     
@@ -66,6 +63,7 @@ class LoginView: UIView {
         textfield.keyboardType = .emailAddress
         textfield.returnKeyType = .default
         textfield.placeholder = " Email Address"
+        textfield.alpha = 0 // for animation
         return textfield
     }()
     
@@ -86,6 +84,7 @@ class LoginView: UIView {
         textfield.returnKeyType = .default
         textfield.placeholder = " Password"
         textfield.isSecureTextEntry = true
+        textfield.alpha = 0 // for animation
         return textfield
     }()
     
@@ -98,6 +97,7 @@ class LoginView: UIView {
         iv.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         iv.layer.shadowOpacity = 1.0
         iv.layer.shadowRadius = 0.0
+        iv.alpha = 0 // for animation
         return iv
     }()
     
@@ -110,14 +110,17 @@ class LoginView: UIView {
         iv.layer.shadowOffset = CGSize(width: 0.0, height: 1.0)
         iv.layer.shadowOpacity = 1.0
         iv.layer.shadowRadius = 0.0
+        iv.alpha = 0
+        iv.alpha = 0 // for animation
         return iv
     }()
     
     lazy var signInButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Sign in", for: .normal)
+        button.setTitle("Sign In", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = UIColor(red: 0.910, green: 0.412, blue: 0.204, alpha: 1.00)
+        button.alpha = 0 // for animation
         return button
     }()
     
@@ -126,6 +129,9 @@ class LoginView: UIView {
         button.setTitle("Create Account", for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.backgroundColor = .clear
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.backgroundColor = UIColor(white: 1, alpha: 0.03)
+        button.alpha = 0 // for animation
         return button
     }()
     
@@ -134,6 +140,9 @@ class LoginView: UIView {
         button.setTitle("Forgot Password?", for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.backgroundColor = .clear
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.backgroundColor = UIColor(white: 1, alpha: 0.03)
+        button.alpha = 0 // for animation
         return button
     }()
     
@@ -151,12 +160,11 @@ class LoginView: UIView {
         backgroundColor = .white
         setupObjects()
         setupViews()
-        
     }
     
     private func setupObjects() {
-        addSubview(appNameLabel)
-        addSubview(subtitleLabel)
+        addSubview(loginImageView)
+        addSubview(titleLabel)
         addSubview(facebookSignInButton)
         addSubview(twitterSignInButton)
         addSubview(emailIconImageView)
@@ -166,18 +174,15 @@ class LoginView: UIView {
         addSubview(signInButton)
         addSubview(createAccountButton)
         addSubview(forgotPasswordButton)
-        
     }
     
     private func setupViews() {
-        appNameLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
-            make.centerX.equalTo(self.safeAreaLayoutGuide.snp.centerX)
-            make.width.equalTo(self.safeAreaLayoutGuide.snp.width).multipliedBy(0.8)
+        loginImageView.snp.makeConstraints { (make) in
+            make.edges.equalTo(self.safeAreaLayoutGuide.snp.edges)
         }
         
-        subtitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(appNameLabel.snp.bottom).offset(20)
+        titleLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(self.safeAreaLayoutGuide.snp.top).offset(20)
             make.centerX.equalTo(self.safeAreaLayoutGuide.snp.centerX)
             make.width.equalTo(self.safeAreaLayoutGuide.snp.width).multipliedBy(0.9)
         }
@@ -196,7 +201,7 @@ class LoginView: UIView {
         }
         
         emailIconImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(subtitleLabel.snp.bottom).offset(20)
+            make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.leading.equalTo(self.safeAreaLayoutGuide.snp.leading).offset(40)
             make.width.equalTo(self.safeAreaLayoutGuide.snp.width).multipliedBy(0.1)
             make.height.equalTo(emailIconImageView.snp.width)
@@ -226,7 +231,6 @@ class LoginView: UIView {
         signInButton.snp.makeConstraints { (make) in
             make.top.equalTo(passwordIconImageView.snp.bottom).offset(10)
             make.centerX.equalTo(self.safeAreaLayoutGuide.snp.centerX)
-            //make.width.height.equalTo(facebookSignInButton)
             make.leading.equalTo(passwordIconImageView.snp.leading)
             make.trailing.equalTo(passwordTextField.snp.trailing)
         }
@@ -242,8 +246,7 @@ class LoginView: UIView {
             make.centerX.equalTo(self.safeAreaLayoutGuide.snp.centerX)
             make.width.equalTo(signInButton.snp.width)
         }
-        
-        
+    
     }
     
 }

@@ -125,7 +125,7 @@ extension Stylesheet {
                     label.numberOfLines = 0
                 case .AppName:
                     label.font = Stylesheet.Fonts.AppName
-                    label.textColor = Stylesheet.Colors.Dark
+                    label.textColor = Stylesheet.Colors.LightGrey
                     label.backgroundColor = .clear
                     label.textAlignment = .center
                     label.numberOfLines = 0
