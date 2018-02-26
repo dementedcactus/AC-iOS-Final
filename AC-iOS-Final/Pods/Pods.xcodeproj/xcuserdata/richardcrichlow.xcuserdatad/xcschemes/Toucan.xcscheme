@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C0BDDD34544BD8DBD011436FDA707EF5"
+               BlueprintIdentifier = "5F49534209D42486F82F2D9D9370895A"
                BuildableName = "Toucan.framework"
                BlueprintName = "Toucan"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C0BDDD34544BD8DBD011436FDA707EF5"
+            BlueprintIdentifier = "5F49534209D42486F82F2D9D9370895A"
             BuildableName = "Toucan.framework"
             BlueprintName = "Toucan"
             ReferencedContainer = "container:Pods.xcodeproj">

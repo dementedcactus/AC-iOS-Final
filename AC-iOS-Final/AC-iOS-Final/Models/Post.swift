@@ -14,7 +14,7 @@ class Post: Codable {
     var imageURL: String?
     var comment: String
     
-    init(postID: String, imageURL: UIImage, comment: String) {
+    init(postID: String, imageURL: String, comment: String) {
         self.postID = postID
         self.imageURL = imageURL
         self.comment = comment

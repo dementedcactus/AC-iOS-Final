@@ -13,7 +13,7 @@ class MainFeedVC: UIViewController {
     let mainFeedView = MainFeedView()
     
     // MARK: DataSource
-    var decksArray = [Post]() {
+    var postsArray = [Post]() {
         didSet {
             mainFeedView.tableView.reloadData()
         }
@@ -34,25 +34,26 @@ class MainFeedVC: UIViewController {
     private func setupView() {
         view.addSubview(mainFeedView)
     }
-    
+    // TODO: Implement later
     @objc func logOutButtonAction() {
         AuthUserService.manager.signOut()
         self.navigationController?.popToRootViewController(animated: true)
     }
 }
-
+extension MainFeedVC: UITableViewDelegate {
+    
+}
 extension MainFeedVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return decksArray.count
+        return postsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell", for: indexPath) as! CustomTableViewCell
         
-        let aPost = decksArray[indexPath.row]
+        let aPost = postsArray[indexPath.row]
         
-        //cell.deckLabel.text = " \(aPost.name)"
-        //cell.numberOfCardsInDeckLabel.text = ""
+        cell.configureCell(withPost: aPost)
         
         return cell
     }

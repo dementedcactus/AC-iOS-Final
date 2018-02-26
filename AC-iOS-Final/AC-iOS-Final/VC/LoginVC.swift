@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import SVProgressHUD
 
 class LoginVC: UIViewController {
     
@@ -94,8 +95,8 @@ class LoginVC: UIViewController {
         let email = loginView.emailTextField.text
         let password = loginView.passwordTextField.text
         
-        //SVProgressHUD.isVisible()
-        //SVProgressHUD.show()
+        SVProgressHUD.isVisible()
+        SVProgressHUD.show()
         
         AuthUserService.manager.delegate = self
         AuthUserService.manager.login(withEmail: email!, andPassword: password!)
@@ -183,7 +184,7 @@ extension LoginVC: AuthUserServiceDelegate {
     
     func didLogin(_ authUserService: AuthUserService, userProfile: UserProfile) {
         print("Log in successful for \(userProfile.displayName), \(userProfile.email)")
-        //SVProgressHUD.dismiss()
+        SVProgressHUD.dismiss()
         
         navigationController?.pushViewController(tabBarVC, animated: true)
     }
