@@ -59,7 +59,7 @@ class UploadView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = .white
+        backgroundColor = UIColor(red: 0.298, green: 0.278, blue: 0.247, alpha: 1.00)
         setupViews()
     }
     

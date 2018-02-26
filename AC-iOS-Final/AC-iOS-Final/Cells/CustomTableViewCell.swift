@@ -22,9 +22,9 @@ class CustomTableViewCell: UITableViewCell {
     }()
     
     //categoryLabel - for Post Category
-    lazy var commentTextView: UITextView = {
-        let ctv = UITextView()
-        Stylesheet.Objects.Textviews.Completed.style(textview: ctv)
+    lazy var commentLabel: UILabel = {
+        let ctv = UILabel()
+        Stylesheet.Objects.Labels.Regular.style(label: ctv)
         return ctv
     }()
     
@@ -46,7 +46,7 @@ class CustomTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        backgroundColor = .white
+        backgroundColor = UIColor(red: 0.298, green: 0.278, blue: 0.247, alpha: 1.00)
         contentView.layer.borderColor = Stylesheet.Colors.LightGrey.cgColor
         contentView.layer.borderWidth = 3
         postImageView.layer.masksToBounds = true
@@ -54,7 +54,7 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     public func configureCell(withPost post: Post) {
-        self.commentTextView.text = "\(post.comment)"
+        self.commentLabel.text = "\(post.comment)"
         
         getImages(withPost: post)
     }
@@ -90,57 +90,29 @@ class CustomTableViewCell: UITableViewCell {
             self.activityIndicator.stopAnimating()
             self.layoutIfNeeded()
         }
-        
-        /*
-        // If the image is already cached
-        ImageCache(name: post.imageURL!).retrieveImage(forKey: post.imageURL!, options: nil, completionHandler: { (image, _) in
-            if let image = image {
-                self.postImageView.image = image
-                self.layoutIfNeeded()
-            } else {
-                // If the image is not in cache
-                guard let imageUrlString = post.imageURL, let url = URL(string: imageUrlString) else {
-                    self.postImageView.image = #imageLiteral(resourceName: "NoDataAvailable")
-                    self.layoutIfNeeded()
-                    return
-                }
-                self.postImageView.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "NoDataAvailable"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
-                    if let image = image {
-                        ImageCache(name: post.imageURL!).store(image, forKey: post.imageURL!)
-                    }
-                    if let error = error {
-                        print(error)
-                    }
-                    self.layoutIfNeeded()
-                })
-            }
-        })
- */
     }
     
     private func setupAndConstrainObjects(){
         
         self.addSubview(postImageView)
-        self.addSubview(commentTextView)
+        self.addSubview(commentLabel)
         self.addSubview(activityIndicator)
         
         postImageView.snp.makeConstraints { (make) -> Void in
             make.height.width.equalTo(self.snp.width).multipliedBy(1).priority(999)
             make.top.equalTo(self.snp.top).offset(5)
-            make.leading.equalTo(self.snp.leading).offset(5)
+            make.leading.equalTo(self.snp.leading)
         }
         
         activityIndicator.snp.makeConstraints { (make) in
             make.edges.equalTo(postImageView)
         }
         
-        commentTextView.snp.makeConstraints { (make) -> Void in
+        commentLabel.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(postImageView.snp.bottom).offset(5)
             make.leading.equalTo(self.snp.leading).offset(5)
             make.trailing.equalTo(self.snp.trailing).offset(-5)
-            make.bottom.equalTo(self.snp.bottom).offset(5)
-            make.height.equalTo(postImageView.snp.height).multipliedBy(0.5)
+            make.bottom.equalTo(self.snp.bottom).offset(-5)
         }
-        
     }
 }

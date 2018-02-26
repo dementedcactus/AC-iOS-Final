@@ -65,7 +65,7 @@ extension Stylesheet {
                     imageView.layer.borderWidth = CGFloat(Stylesheet.BorderWidths.FunctionButtons)
                     imageView.layer.borderColor = (Stylesheet.Colors.Dark).cgColor
                 case .Opaque:
-                    imageView.backgroundColor = .white
+                    imageView.backgroundColor = UIColor(red: 0.298, green: 0.278, blue: 0.247, alpha: 1.00)
                     imageView.contentMode = .scaleAspectFill
                 }
             }
@@ -119,9 +119,9 @@ extension Stylesheet {
                 switch self {
                 case .Regular:
                     label.font = Stylesheet.Fonts.Regular
-                    label.textColor = Stylesheet.Colors.Dark
+                    label.textColor = Stylesheet.Colors.LightGrey
                     label.backgroundColor = .clear
-                    label.textAlignment = .left
+                    label.textAlignment = .center
                     label.numberOfLines = 0
                 case .AppName:
                     label.font = Stylesheet.Fonts.AppName

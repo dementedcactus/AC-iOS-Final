@@ -17,6 +17,7 @@ class MainFeedVC: UIViewController {
     var postsArray = [Post]() {
         didSet {
             mainFeedView.tableView.reloadData()
+            emptyView.removeFromSuperview()
         }
     }
     
@@ -31,7 +32,7 @@ class MainFeedVC: UIViewController {
         mainFeedView.tableView.rowHeight = UITableViewAutomaticDimension
         DatabaseService.manager.refreshDelegate = self
         DatabaseService.manager.showAlertDelegate = self
-        //refreshTableView()
+        refreshTableView()
     }
     
     private func setupView() {
