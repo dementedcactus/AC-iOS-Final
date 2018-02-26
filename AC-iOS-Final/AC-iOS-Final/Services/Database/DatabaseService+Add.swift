@@ -38,7 +38,7 @@ extension DatabaseService {
     
     public func addPost(_ post: Post, _ image: UIImage?) {
         
-        let ref = postsRef.child(post.postID)
+        let ref = postsRef.child(post.userID).child(post.postID)
         
         ref.setValue(["imageURL": post.imageURL,
                       "postID": post.postID,
@@ -60,7 +60,7 @@ extension DatabaseService {
     }
     
     public func addImageURLToPost(url: String, postID: String) {
-        addImageURL(url: url, toRef: postsRef, withID: postID)
+        addImageURL(url: url, toRef: postsRef.child((AuthUserService.manager.getCurrentUser()?.uid)!), withID: postID)
     }
     
     private func addImageURL(url: String, toRef ref: DatabaseReference, withID id: String) {

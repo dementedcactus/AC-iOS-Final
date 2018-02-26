@@ -11,13 +11,6 @@ import FirebaseDatabase
 
 extension DatabaseService {
     
-    /** Generates a UserProfile object for the current user from the database.
-     
-     - Parameters:
-     - uid: The unique userID for the current, authenticated user.
-     - completion: A closure that executes after a UserProfile is made.
-     - userProfile: A UserProfile object for the current user.
-     */
     public func getUserProfile(withUID uid: String, completion: @escaping (_ userProfile: UserProfile) -> Void) {
         let ref = usersRef.child(uid)
         ref.observe(.value) { (dataSnapshot) in
@@ -33,46 +26,41 @@ extension DatabaseService {
         }
     }
     
-    /*
-    func getAllDecks(fromUserID userID: String, completion: @escaping ([Deck]?) -> Void) {
-        let deckRef = decksRef.child(userID)
-        deckRef.observeSingleEvent(of: .value) { (dataSnapshot) in
-            //print(dataSnapshot)
-            guard let arrayOfDeckSnapshot = dataSnapshot.children.allObjects as? [DataSnapshot] else {
+    func getAllPosts(fromUserID userID: String, completion: @escaping ([Post]?) -> Void) {
+        let allPostsRef = postsRef.child(userID)
+        allPostsRef.observeSingleEvent(of: .value) { (dataSnapshot) in
+            guard let arrayOfAllPostsSnapshot = dataSnapshot.children.allObjects as? [DataSnapshot] else {
                 print("could not get children snapshots")
                 completion(nil)
                 return
             }
-            var deckArrayToRetur: [Deck] = [] // This is the empty deck that will be filled by the completion handler
-            for deckSnapshot in arrayOfDeckSnapshot {
-                guard let deckDictionary = deckSnapshot.value as? [String : Any] else {
-                    print("could not get deck dict")
+            var postsArrayToReturn: [Post] = [] // This is the empty post array that will be filled by the completion handler
+            for postSnapshot in arrayOfAllPostsSnapshot {
+                guard let postDictionary = postSnapshot.value as? [String : Any] else {
+                    print("could not get post dict")
                     completion(nil)
                     return
                 }
-                guard let downcastedUserID = deckDictionary["userID"] as? String else {
+                guard let downcastedUserID = postDictionary["userID"] as? String else {
                     completion(nil)
                     return
                 }
-                guard let downcastedName = deckDictionary["name"] as? String else {
+                guard let downcastedComment = postDictionary["comment"] as? String else {
                     completion(nil)
                     return
                 }
-                guard let downcastedNumberOfCards = deckDictionary["numberOfCards"] as? Int else {
+                guard let downcastedImageURL = postDictionary["imageURL"] as? String else {
                     completion(nil)
                     return
                 }
-                let deck = Deck(userID: downcastedUserID,
-                                name: downcastedName,
-                                numberOfCards: downcastedNumberOfCards)
-                deckArrayToRetur.append(deck)
+                guard let downcastedPostID = postDictionary["postID"] as? String else {
+                    completion(nil)
+                    return
+                }
+                let post = Post(postID: downcastedPostID, imageURL: downcastedImageURL, comment: downcastedComment, userID: downcastedUserID)
+                postsArrayToReturn.append(post)
             }
-            completion(deckArrayToRetur)
+            completion(postsArrayToReturn)
         }
     }
-    
-    
- */
-    
-    
 }

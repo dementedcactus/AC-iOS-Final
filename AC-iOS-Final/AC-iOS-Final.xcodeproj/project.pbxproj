@@ -34,6 +34,7 @@
 		DBE4AF36204472AE0046F531 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4AF35204472AE0046F531 /* TabBarVC.swift */; };
 		DBE4AF382044909F0046F531 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4AF372044909F0046F531 /* CustomTableViewCell.swift */; };
 		DBE4AF3C2044AA650046F531 /* StorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4AF3B2044AA650046F531 /* StorageService.swift */; };
+		DBE4AF3E2044B9BB0046F531 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBE4AF3D2044B9BB0046F531 /* EmptyStateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		DBE4AF35204472AE0046F531 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		DBE4AF372044909F0046F531 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		DBE4AF3B2044AA650046F531 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
+		DBE4AF3D2044B9BB0046F531 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 				DBE4AF0F204469970046F531 /* LoginView.swift */,
 				DBE4AF2920446D5F0046F531 /* MainFeedView.swift */,
 				DBE4AF2D20446DD40046F531 /* UploadView.swift */,
+				DBE4AF3D2044B9BB0046F531 /* EmptyStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				DBE4AF1A20446A810046F531 /* AuthUserServiceDelegate.swift in Sources */,
 				DBE4AF1820446A5A0046F531 /* AuthUserService.swift in Sources */,
 				DBE4AF3220446F810046F531 /* UserProfile.swift in Sources */,
+				DBE4AF3E2044B9BB0046F531 /* EmptyStateView.swift in Sources */,
 				DBE4AF2620446CF80046F531 /* CreateAccountView.swift in Sources */,
 				54915215203F335F009C7138 /* AppDelegate.swift in Sources */,
 				DBE4AF1E20446ABE0046F531 /* DatabaseServiceDelegate.swift in Sources */,

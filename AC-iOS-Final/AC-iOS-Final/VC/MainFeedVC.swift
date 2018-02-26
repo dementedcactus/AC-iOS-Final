@@ -11,6 +11,7 @@ import UIKit
 class MainFeedVC: UIViewController {
     
     let mainFeedView = MainFeedView()
+    let emptyView = EmptyStateView(emptyText: "No posts.\nAdd a new post, or check your internet and restart the app.")
     
     // MARK: DataSource
     var postsArray = [Post]() {
@@ -30,12 +31,21 @@ class MainFeedVC: UIViewController {
         mainFeedView.tableView.rowHeight = UITableViewAutomaticDimension
         DatabaseService.manager.refreshDelegate = self
         DatabaseService.manager.showAlertDelegate = self
+        //refreshTableView()
     }
     
     private func setupView() {
         view.addSubview(mainFeedView)
     }
-    // TODO: Implement later
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        refreshTableView()
+    }
+    
+    
+    // TODO: Implement later?
     @objc func logOutButtonAction() {
         AuthUserService.manager.signOut()
         self.navigationController?.popToRootViewController(animated: true)
@@ -70,14 +80,19 @@ extension MainFeedVC: ShowAlertDelegate {
 }
 extension MainFeedVC: RefreshDelegate {
     func refreshTableView() {
-//        DatabaseService.manager.getAllDecks(fromUserID: (AuthUserService.manager.getCurrentUser()?.uid)!, completion: { (someData) in
-//            if let deckArray = someData {
-//                self.decksArray = deckArray
-//                
-//            } else {
-//                print("Couldn't get decks or there are no decks")
-//                //TODO: Maybe show an image of no data as a background
-//            }
-//        })
+        DatabaseService.manager.getAllPosts(fromUserID: (AuthUserService.manager.getCurrentUser()?.uid)!) { (Posts) in
+            if let posts = Posts {
+                self.postsArray = posts
+                
+            } else {
+                print("Couldn't get posts or there are no cards")
+            }
+        }
+        if postsArray.isEmpty {
+            self.view.addSubview(emptyView)
+            
+        } else {
+            emptyView.removeFromSuperview()
+        }
     }
 }

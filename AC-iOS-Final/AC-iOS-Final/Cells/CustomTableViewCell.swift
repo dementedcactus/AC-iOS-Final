@@ -61,11 +61,37 @@ class CustomTableViewCell: UITableViewCell {
     
     private func getImages(withPost post: Post) {
         self.postImageView.image = nil
-        
+        //self.activityIndicator.startAnimating()
         guard post.imageURL != nil else {
             print("No image url")
             return
         }
+        
+        self.postImageView.image = nil
+        self.activityIndicator.startAnimating()
+        if let postURLString = post.imageURL, let imageURL = URL(string: postURLString) {
+            ImageCache(name: post.postID).retrieveImage(forKey: post.postID, options: nil, completionHandler: { (image, _) in
+                if let image = image {
+                    self.postImageView.image = image
+                    self.activityIndicator.stopAnimating()
+                    self.layoutIfNeeded()
+                } else {
+                    self.postImageView.kf.setImage(with: imageURL, placeholder: #imageLiteral(resourceName: "NoDataAvailable"), options: nil, progressBlock: nil, completionHandler: { (image, error, _, _) in
+                        if let image = image {
+                            ImageCache(name: post.postID).store(image, forKey: post.postID)
+                            self.activityIndicator.stopAnimating()
+                            self.layoutIfNeeded()
+                        }
+                    })
+                }
+            })
+        } else {
+            self.postImageView.image = #imageLiteral(resourceName: "NoDataAvailable")
+            self.activityIndicator.stopAnimating()
+            self.layoutIfNeeded()
+        }
+        
+        /*
         // If the image is already cached
         ImageCache(name: post.imageURL!).retrieveImage(forKey: post.imageURL!, options: nil, completionHandler: { (image, _) in
             if let image = image {
@@ -89,6 +115,7 @@ class CustomTableViewCell: UITableViewCell {
                 })
             }
         })
+ */
     }
     
     private func setupAndConstrainObjects(){
@@ -98,13 +125,15 @@ class CustomTableViewCell: UITableViewCell {
         self.addSubview(activityIndicator)
         
         postImageView.snp.makeConstraints { (make) -> Void in
-            make.height.width.equalTo(self.snp.width).multipliedBy(0.09).priority(999)
+            make.height.width.equalTo(self.snp.width).multipliedBy(1).priority(999)
             make.top.equalTo(self.snp.top).offset(5)
             make.leading.equalTo(self.snp.leading).offset(5)
         }
+        
         activityIndicator.snp.makeConstraints { (make) in
             make.edges.equalTo(postImageView)
         }
+        
         commentTextView.snp.makeConstraints { (make) -> Void in
             make.top.equalTo(postImageView.snp.bottom).offset(5)
             make.leading.equalTo(self.snp.leading).offset(5)
