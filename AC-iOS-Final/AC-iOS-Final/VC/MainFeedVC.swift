@@ -32,7 +32,8 @@ class MainFeedVC: UIViewController {
         mainFeedView.tableView.rowHeight = UITableViewAutomaticDimension
         DatabaseService.manager.refreshDelegate = self
         DatabaseService.manager.showAlertDelegate = self
-        refreshTableView()
+        
+        //refreshTableView()
     }
     
     private func setupView() {
@@ -42,7 +43,9 @@ class MainFeedVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        refreshTableView()
+        if AuthUserService.manager.getCurrentUser() != nil {
+            refreshTableView()
+        }
     }
     
     
@@ -80,6 +83,7 @@ extension MainFeedVC: ShowAlertDelegate {
     }
 }
 extension MainFeedVC: RefreshDelegate {
+    
     func refreshTableView() {
         DatabaseService.manager.getAllPosts(fromUserID: (AuthUserService.manager.getCurrentUser()?.uid)!) { (Posts) in
             if let posts = Posts {
